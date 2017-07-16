@@ -17,7 +17,7 @@ void AVLTree::Delete(int item)
 {
 }
 
-void AVLTree::LLRotation(Node * node) //TODO: HEIGHT ADJUSTMENT
+void AVLTree::LLRotation(Node * node)
 {
 	if (node->getBalanceFactor() > -2)
 		return;
@@ -34,9 +34,11 @@ void AVLTree::LLRotation(Node * node) //TODO: HEIGHT ADJUSTMENT
 
 	if (leftChild->parent == nullptr)
 		this->root = leftChild;
+
+	this->root->getHeight();
 }
 
-void AVLTree::RRRotation(Node * node) //TODO: HEIGHT ADJUSTMENT
+void AVLTree::RRRotation(Node * node)
 {
 	if (node->getBalanceFactor() < 2)
 		return;
@@ -53,6 +55,8 @@ void AVLTree::RRRotation(Node * node) //TODO: HEIGHT ADJUSTMENT
 
 	if (rightChild->parent == nullptr)
 		this->root = rightChild;
+
+	this->root->getHeight();
 }
 
 void AVLTree::LRRotation(Node * node)
