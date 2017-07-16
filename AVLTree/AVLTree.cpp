@@ -27,22 +27,22 @@ void AVLTree::Insert(int item)
 			if (position->leftChild == nullptr) {
 				position->leftChild = new Node(item);
 				position->leftChild->parent = position;
-				return;
+				break;
 			}
-			else
-				position = position->leftChild;
+
+			position = position->leftChild;
 		}
 		else if (position->nodeValue < item) { // Greater than current val.
 			if (position->rightChild == nullptr) {
 				position->rightChild = new Node(item);
 				position->rightChild->parent = position;
-				return;
+				break;
 			}
-			else
-				position = position->rightChild;
+			
+			position = position->rightChild;
 		}
 
-	} while (position && (position->leftChild || position->rightChild));
+	} while (position);
 
 	this->DecideRotation(position);
 }
