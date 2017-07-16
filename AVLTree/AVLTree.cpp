@@ -56,20 +56,20 @@ void AVLTree::DecideRotation(Node * node)
 	// BalanceFactor = LeftHeight - RightHeight;
 
 	if (node->parent) {
-		node->parent->getHeight();
+		this->root->getHeight();
 		int balance = node->parent->getBalanceFactor();
 
-		if (balance == 2 && node->rightChild->getBalanceFactor() == 1) {
+		if (balance == 2 && node->getBalanceFactor() == 1) {
 			// Single Right Rotation
-			this->RRRotation(node->parent);
+			this->RRotation(node->parent);
 		}
 		else if (balance == 2) {
 			// Left Right Rotation
 			this->LRRotation(node->parent);
 		}
-		else if (balance == -2 && node->leftChild->getBalanceFactor() == -1) {
+		else if (balance == -2 && node->getBalanceFactor() == -1) {
 			// Single Left Rotation
-			this->LLRotation(node->parent);
+			this->LRotation(node->parent);
 		}
 		else if (balance == -2) {
 			// Right Left Rotation
