@@ -11,6 +11,39 @@ int AVLTree::Search(int item)
 
 void AVLTree::Insert(int item)
 {
+	if (this->root == nullptr) {
+		this->root = new Node(item);
+		this->root->getHeight();
+		return;
+	}
+
+	Node * position = this->root;
+
+	do {
+		if (position->nodeValue == item) {
+			return; // Duplicate.
+		}
+		else if (position->nodeValue > item) { // Less than current val.
+			if (position->leftChild == nullptr) {
+				position->leftChild = new Node(item);
+				position->leftChild->parent = position;
+				return;
+			}
+			else
+				position = position->leftChild;
+		}
+		else if (position->nodeValue < item) { // Greater than current val.
+			if (position->rightChild == nullptr) {
+				position->rightChild = new Node(item);
+				position->rightChild->parent = position;
+				return;
+			}
+			else
+				position = position->rightChild;
+		}
+
+	} while (position && (position->leftChild || position->rightChild));
+
 }
 
 void AVLTree::Delete(int item)
