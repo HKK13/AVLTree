@@ -44,10 +44,39 @@ void AVLTree::Insert(int item)
 
 	} while (position && (position->leftChild || position->rightChild));
 
+	this->DecideRotation(position);
 }
 
 void AVLTree::Delete(int item)
 {
+}
+
+void AVLTree::DecideRotation(Node * node)
+{
+	// BalanceFactor = LeftHeight - RightHeight;
+
+	if (node->parent) {
+		node->parent->getHeight();
+		int balance = node->parent->getBalanceFactor();
+
+		if (balance == 2 && node->rightChild->getBalanceFactor() == 1) {
+			// Single Right Rotation
+			this->RRRotation(node->parent);
+		}
+		else if (balance == 2) {
+			// Left Right Rotation
+			this->LRRotation(node->parent);
+		}
+		else if (balance == -2 && node->leftChild->getBalanceFactor() == -1) {
+			// Single Left Rotation
+			this->LLRotation(node->parent);
+		}
+		else if (balance == -2) {
+			// Right Left Rotation
+			this->RLRotation(node->parent);
+		}
+	}
+
 }
 
 void AVLTree::LLRotation(Node * node)
