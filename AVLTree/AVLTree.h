@@ -7,6 +7,9 @@ struct Node {
 
 class AVLTree {
 public:
+
+	AVLTree();
+
 	int Search(int item);
 	void Insert(int item);
 	void Delete(int item);
@@ -15,5 +18,5 @@ private:
 	void RRRotation(Node * node);
 	void LRRotation(Node * node);
 	void RLRotation(Node * node);
-	Node root;
+	Node *root;
 };
