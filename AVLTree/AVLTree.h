@@ -36,12 +36,17 @@ public:
 
 	AVLTree();
 
-	int Search(int item);
+	Node * Search(int item);
 	void Insert(int item);
 	void Delete(int item);
+	void DecideRotation(Node * node);
+	void Print();
+
+	int getHeight();
+
 private:
-	void LLRotation(Node * node);
-	void RRRotation(Node * node);
+	void LRotation(Node * node);
+	void RRotation(Node * node);
 	void LRRotation(Node * node);
 	void RLRotation(Node * node);
 	Node *root;

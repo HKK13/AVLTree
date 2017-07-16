@@ -1,12 +1,27 @@
 #include "AVLTree.h"
+#include <iostream>
+#include <string>
+
 
 AVLTree::AVLTree() {
 	this->root = nullptr;
 }
 
-int AVLTree::Search(int item)
+Node * AVLTree::Search(int item)
 {
-	return 0;
+	Node * tempSearch = this->root;
+
+	while (tempSearch && (tempSearch->leftChild || tempSearch->rightChild)) {
+		if (item == tempSearch->nodeValue) {
+			break;
+		}
+		else if (item < tempSearch->nodeValue)
+			tempSearch = tempSearch->leftChild;
+		else if (item > tempSearch->nodeValue)
+			tempSearch = tempSearch->rightChild;
+	}
+
+	return tempSearch;
 }
 
 void AVLTree::Insert(int item)
@@ -79,9 +94,20 @@ void AVLTree::DecideRotation(Node * node)
 
 }
 
+void AVLTree::Print() {
+	std::cout << this->root->nodeValue << std::endl;
+
+	std::cout << this->root->leftChild->nodeValue << std::endl;
+
+	std::cout << this->root->rightChild->nodeValue << std::endl;
+
+
+}
+
+int AVLTree::getHeight()
 {
-	if (node->getBalanceFactor() > -2)
-		return;
+	return this->root->getHeight();
+}
 
 void AVLTree::RRotation(Node * node)
 {
