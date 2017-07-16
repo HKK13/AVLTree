@@ -79,7 +79,7 @@ void AVLTree::DecideRotation(Node * node)
 
 }
 
-void AVLTree::LLRotation(Node * node)
+void AVLTree::RRRotation(Node * node)
 {
 	if (node->getBalanceFactor() > -2)
 		return;
@@ -100,7 +100,7 @@ void AVLTree::LLRotation(Node * node)
 	this->root->getHeight();
 }
 
-void AVLTree::RRRotation(Node * node)
+void AVLTree::LLRotation(Node * node)
 {
 	if (node->getBalanceFactor() < 2)
 		return;
