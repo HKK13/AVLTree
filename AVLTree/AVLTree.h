@@ -8,20 +8,26 @@ struct Node {
 	Node(int value) {
 		this->leftHeight = 0;
 		this->rightHeight = 0;
+		this->leftChild = nullptr;
+		this->rightChild = nullptr;
+		this->parent = nullptr;
 		this->nodeValue = value;
 	}
 
 	int getBalanceFactor() {
-		return leftHeight - rightHeight;
+		return this->leftHeight - this->rightHeight;
 	}
 
 	int getHeight() {
-		if (leftChild)
-			leftHeight = 1 + leftChild->getHeight();
-		if (rightChild)
-			rightHeight = 1 + rightChild->getHeight();
+		this->leftHeight = 0;
+		this->rightHeight = 0;
 
-		return leftHeight < rightHeight ? rightHeight : leftHeight;
+		if (this->leftChild)
+			this->leftHeight = 1 + this->leftChild->getHeight();
+		if (this->rightChild)
+			this->rightHeight = 1 + this->rightChild->getHeight();
+
+		return this->leftHeight <= this->rightHeight ? this->rightHeight : this->leftHeight;
 	}
 };
 
