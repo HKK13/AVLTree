@@ -96,22 +96,12 @@ void AVLTree::DecideRotation(Node * node)
 	} while (temp);
 }
 
-void AVLTree::Print() {
-	std::cout << this->root->nodeValue << std::endl;
-
-	std::cout << this->root->leftChild->nodeValue << std::endl;
-
-	std::cout << this->root->rightChild->nodeValue << std::endl;
-
-
-}
-
 int AVLTree::getHeight()
 {
 	return this->root->getHeight();
 }
 
-void AVLTree::RRotation(Node * node)
+void AVLTree::RRotation(Node * node) // Rotates right to left.
 {
 	Node * temp = node->leftChild;
 	node->leftChild = temp->rightChild;
@@ -136,7 +126,7 @@ void AVLTree::RRotation(Node * node)
 	}
 }
 
-void AVLTree::LRotation(Node * node)
+void AVLTree::LRotation(Node * node) // Rotates left to right.
 {
 	Node * temp = node->rightChild;
 	node->rightChild = temp->leftChild;
