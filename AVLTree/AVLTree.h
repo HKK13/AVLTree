@@ -45,10 +45,11 @@ public:
 	void setRoot(Node * node);
 	int getHeight();
 
-private:
 	void LRotation(Node * node);
 	void RRotation(Node * node);
 	void LRRotation(Node * node);
 	void RLRotation(Node * node);
+
+private:
 	Node *root;
 };
