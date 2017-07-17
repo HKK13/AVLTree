@@ -11,14 +11,16 @@ Node * AVLTree::Search(int item)
 {
 	Node * tempSearch = this->root;
 
-	while (tempSearch && (tempSearch->leftChild || tempSearch->rightChild)) {
+	while (tempSearch) {
 		if (item == tempSearch->nodeValue) {
 			break;
 		}
-		else if (item < tempSearch->nodeValue)
+		else if (tempSearch->leftChild && item < tempSearch->nodeValue)
 			tempSearch = tempSearch->leftChild;
-		else if (item > tempSearch->nodeValue)
+		else if (tempSearch->rightChild && item > tempSearch->nodeValue)
 			tempSearch = tempSearch->rightChild;
+		else
+			tempSearch = nullptr;
 	}
 
 	return tempSearch;
