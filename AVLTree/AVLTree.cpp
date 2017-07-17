@@ -69,29 +69,31 @@ void AVLTree::Delete(int item)
 void AVLTree::DecideRotation(Node * node)
 {
 	// BalanceFactor = LeftHeight - RightHeight;
+	Node * temp = node;
 
-	if (node->parent) {
-		this->root->getHeight();
-		int balance = node->parent->getBalanceFactor();
+	do {
+		temp->getHeight();
+		int balance = temp->getBalanceFactor();
 
-		if (balance == 2 && node->getBalanceFactor() == 1) {
+		if (balance == 2 && temp->leftChild && temp->leftChild->getBalanceFactor() == 1) {
 			// Single Right Rotation
-			this->RRotation(node->parent);
+			this->RRotation(temp);
 		}
 		else if (balance == 2) {
 			// Left Right Rotation
-			this->LRRotation(node->parent);
+			this->LRRotation(temp);
 		}
-		else if (balance == -2 && node->getBalanceFactor() == -1) {
+		else if (balance == -2 && temp->rightChild && temp->rightChild->getBalanceFactor() == -1) {
 			// Single Left Rotation
-			this->LRotation(node->parent);
+			this->LRotation(temp);
 		}
 		else if (balance == -2) {
 			// Right Left Rotation
-			this->RLRotation(node->parent);
+			this->RLRotation(temp);
 		}
-	}
 
+		temp = temp->parent;
+	} while (temp);
 }
 
 void AVLTree::Print() {
@@ -111,46 +113,52 @@ int AVLTree::getHeight()
 
 void AVLTree::RRotation(Node * node)
 {
-	Node * tempLeftChild = node->leftChild;
-	node->leftChild = tempLeftChild->rightChild;
+	Node * temp = node->leftChild;
+	node->leftChild = temp->rightChild;
+	temp->rightChild = nullptr;
 
-	if (node->leftChild)
+	if (node->leftChild) {
 		node->leftChild->parent = node;
+	}
 
-	tempLeftChild->parent = node->parent;
-	
-	if (node->parent)
-		node->parent->rightChild = tempLeftChild;
-	
-	tempLeftChild->rightChild = node;
-	node->parent = tempLeftChild;
+	temp->rightChild = node;
+	temp->parent = node->parent;
+	node->parent = temp;
 
-	if (tempLeftChild->parent == nullptr)
-		this->root = tempLeftChild;
-
-	this->root->getHeight();
+	if (temp->parent && temp->parent->nodeValue < temp->nodeValue) {
+		temp->parent->rightChild = temp;
+	}
+	else if (temp->parent) {
+		temp->parent->leftChild = temp;
+	}
+	else {
+		this->root = temp;
+	}
 }
 
 void AVLTree::LRotation(Node * node)
 {
-	Node * tempRightChild = node->rightChild;
-	node->rightChild = tempRightChild->leftChild;
-	
-	if (node->rightChild)
+	Node * temp = node->rightChild;
+	node->rightChild = temp->leftChild;
+	temp->leftChild = nullptr;
+
+	if (node->rightChild) {
 		node->rightChild->parent = node;
-	
-	tempRightChild->parent = node->parent;
+	}
 
-	if (node->parent)
-		node->parent->leftChild = tempRightChild;
-	
-	tempRightChild->leftChild = node;
-	node->parent = tempRightChild;
+	temp->leftChild = node;
+	temp->parent = node->parent;
+	node->parent = temp;
 
-	if (tempRightChild->parent == nullptr)
-		this->root = tempRightChild;
-
-	this->root->getHeight();
+	if (temp->parent && temp->parent->nodeValue < temp->nodeValue) {
+		temp->parent->rightChild = temp;
+	}
+	else if (temp->parent) {
+		temp->parent->leftChild = temp;
+	}
+	else {
+		this->root = temp;
+	}
 }
 
 void AVLTree::LRRotation(Node * node)
