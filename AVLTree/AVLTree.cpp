@@ -98,6 +98,16 @@ void AVLTree::DecideRotation(Node * node)
 	} while (temp);
 }
 
+Node * AVLTree::getRoot()
+{
+	return this->root;
+}
+
+void AVLTree::setRoot(Node * node)
+{
+	this->root = node;
+}
+
 int AVLTree::getHeight()
 {
 	return this->root->getHeight();

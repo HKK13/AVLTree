@@ -40,8 +40,9 @@ public:
 	void Insert(int item);
 	void Delete(int item);
 	void DecideRotation(Node * node);
-	void Print();
 
+	Node * getRoot();
+	void setRoot(Node * node);
 	int getHeight();
 
 private:
